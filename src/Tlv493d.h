@@ -40,10 +40,29 @@
 #include "./util/Tlv493d_conf.h"
 
 typedef enum Tlv493d_Address
-{
-	TLV493D_ADDRESS1	=	0x5E,
-	TLV493D_ADDRESS2	=	0x1F
+{									// SDA		IICAddr
+	TLV493D_ADDRESS1	=	0x5E,	// High,	00
+	TLV493D_ADDRESS2	=	0x1F,	// Low,		00
+	TLV493D_ADDRESS3	=	0x5A,	// High,	01
+	TLV493D_ADDRESS4	=	0x1B,	// Low,		01
+	TLV493D_ADDRESS5	=	0x4E,	// High,	10
+	TLV493D_ADDRESS6	=	0x0F,	// Low,		10
+	TLV493D_ADDRESS7	=	0x4A,	// High,	11
+	TLV493D_ADDRESS8	=	0x0B	// Low,		11
 }Tlv493d_Address_t;
+
+
+typedef enum Tlv493d_Address_Custom
+{									// SDA		IICAddr
+	TLV493D_ADDRESS_Custom1	=	0,	// High,	00
+	TLV493D_ADDRESS_Custom2	=	0,	// Low,		00
+	TLV493D_ADDRESS_Custom3	=	1,	// High,	01
+	TLV493D_ADDRESS_Custom4	=	1,	// Low,		01
+	TLV493D_ADDRESS_Custom5	=	2,	// High,	10
+	TLV493D_ADDRESS_Custom6	=	2,	// Low,		10
+	TLV493D_ADDRESS_Custom7	=	3,	// High,	11
+	TLV493D_ADDRESS_Custom8	=	3	// Low,		11
+}Tlv493d_Address_Custom_t;
 
 
 typedef enum Tlv493d_Error
@@ -100,6 +119,11 @@ public:
 		MASTERCONTROLLEDMODE,
 	};
 	bool setAccessMode(AccessMode_e mode);
+	
+	void setAddress(Tlv493d_Address_Custom_t adrNew, Tlv493d_Address_t adr);
+
+	
+	
 	// interrupt is disabled by default
 	// it is recommended for FASTMODE, LOWPOWERMODE and ULTRALOWPOWERMODE
 	// the interrupt is indicated with a short(1.5 us) low pulse on SCL

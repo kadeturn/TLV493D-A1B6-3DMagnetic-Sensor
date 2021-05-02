@@ -111,6 +111,16 @@ bool Tlv493d::setAccessMode(AccessMode_e mode)
 	return ret;
 }
 
+void Tlv493d::setAddress(Tlv493d_Address_Custom_t adrNew, Tlv493d_Address_t adr)
+{
+
+	setRegBits(tlv493d::W_ADDR, adrNew);
+	calcParity();
+	tlv493d::writeOut(&mInterface);
+	
+	mInterface.adress = adr;
+}
+
 
 void Tlv493d::enableInterrupt(void)
 {
